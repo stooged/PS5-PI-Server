@@ -37,6 +37,9 @@ address=/nintendo.net/127.0.0.1
 address=/ea.com/127.0.0.1" | sudo tee -a /etc/dnsmasq.more.conf
 sudo sed -i 's^rock-4c-plus^ps5^g' /etc/hosts
 sudo sed -i 's^rock-4c-plus^ps5^g' /etc/hostname
+sudo systemctl stop systemd-resolved
+sudo systemctl disable systemd-resolved
+sudo systemctl mask systemd-resolved
 echo "Install complete, Rebooting"
 sudo reboot
 
