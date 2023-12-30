@@ -20,7 +20,7 @@ install git
 
 ```
 sudo apt update
-sudo apt install git
+sudo apt install git -y
 ```
 
 clone this repo and enter the cloned directory
