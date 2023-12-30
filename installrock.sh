@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sudo sed -i 's/#DNSStubListener=yes/DNSStubListener=no/g' /etc/systemd/resolved.conf
-sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 sudo apt install dnsmasq -y
 sudo apt-get install nginx -y
 sudo sed -i 's/#domain-needed/domain-needed/g' /etc/dnsmasq.conf
