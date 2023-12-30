@@ -44,6 +44,9 @@ edit the dns settings on your ps5 to the ip of the raspberry pi and you can then
 
 
 
+### Rock PI
+
+
 if you happen to have a <a href=https://wiki.radxa.com/Rock4/4cplus>ROCK 4C Plus</a> then you can run this install script
 
 ```
