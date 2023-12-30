@@ -65,8 +65,31 @@ tested on debian bullseye
 
 <br><br>
 
+
+
+### BTT PI
+<hr>
+
+
+if you happen to have a <a href=https://biqu.equipment/en-au/products/bigtreetech-btt-pi-v1-2>BTT Pi</a> then you can run this install script
+
+```
+chmod 777 installbtt.sh
+sudo ./installbtt.sh
+```
+
+tested on debian 11 minimal
+<a href=https://github.com/bigtreetech/CB1/releases/download/V2.3.3/CB1_Debian11_minimal_kernel5.16_20230712.img.xz>CB1_Debian11_minimal_kernel5.16_20230712.img.xz</a>
+
+<br><br>
+
+
+
 ## Console
 
 once the pi reboots you should be able to access it on http://ps5.local
 
 edit the dns settings on your ps5 to the ip of the pi and you can then go to the user guide to run the exploit.
+
+
+
