@@ -30,6 +30,13 @@ git clone https://github.com/stooged/PS5-PI-Server
 cd PS5-PI-Server
 ```
 
+
+
+<br>
+
+### Raspberry PI
+<hr>
+
 run the raspberry pi install script
 
 ```
