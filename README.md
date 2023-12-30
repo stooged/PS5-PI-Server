@@ -43,8 +43,9 @@ once the pi reboots you should be able to access it on http://ps5.local
 edit the dns settings on your ps5 to the ip of the raspberry pi and you can then go to the user guide to run the exploit.
 
 
-
+<br>
 ### Rock PI
+<hr>
 
 
 if you happen to have a <a href=https://wiki.radxa.com/Rock4/4cplus>ROCK 4C Plus</a> then you can run this install script
