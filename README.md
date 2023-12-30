@@ -63,7 +63,7 @@ sudo ./installrock.sh
 tested on debian bullseye
 <a href=https://github.com/radxa-build/rock-4c-plus/releases/download/b60/rock-4c-plus_debian_bullseye_cli_b60.img.xz>rock-4c-plus_debian_bullseye_cli_b60.img.xz</a>
 
-
+<br><br>
 
 ## Console
 
