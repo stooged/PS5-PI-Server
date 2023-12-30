@@ -2,6 +2,10 @@
 
 sudo rm /etc/dnsmasq.more.conf
 
+while [ "$(hostname -I)" = "" ]; do
+  sleep 1
+done
+
 IP=$(hostname -I | cut -f1 -d' ')
 
 echo "address=/playstation.com/127.0.0.1
