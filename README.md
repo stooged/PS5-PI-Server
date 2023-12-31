@@ -97,7 +97,7 @@ chmod 777 setup_Samba.sh
 sudo ./setup_Samba.sh
 ```
 
-once completed you can access the drive on \\ps5.local\www or smb:\\ps5.local\www<br>
+once completed you can access the drive on \\\ps5.local\www or smb:\\\ps5.local\www<br>
 the share has no user/password required to access it.
 
 <br><br>
