@@ -7,7 +7,7 @@ this is an install script to setup a dns server(blocker), web server and a explo
 it is using <a href=https://github.com/idlesauce/PS5-Exploit-Host>PS5-Exploit-Host</a> by idlesauce.
 
 
-## Setup
+## Repo Setup
 
 install an os like Raspberry Pi OS Lite
 
