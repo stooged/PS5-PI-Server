@@ -91,7 +91,9 @@ tested on debian 11 minimal
 <hr>
 
 
-if you want to connect the console directly to the pi using wifi then you can setup a wifi access point on the pi
+if you want to connect the console directly to the pi using wifi then you can setup a wifi access point on the pi.
+
+this setup assumes you are connecting the pi to your home network using an ethernet cable not wifi.
 
 
 ```
