@@ -46,6 +46,10 @@ sudo ./install.sh
 ```
 
 
+tested on raspberry pi os lite
+<a href=https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2023-12-11/2023-12-11-raspios-bookworm-arm64-lite.img.xz>2023-12-11-raspios-bookworm-arm64-lite.img.xz</a>
+
+
 
 <br>
 
