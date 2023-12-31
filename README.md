@@ -100,8 +100,15 @@ chmod 777 setup_wifiAP.sh
 sudo ./setup_wifiAP.sh
 ```
 
+the default settings are<br>
+ssid=PS5_WEB_AP<br>
+wpa_passphrase=password<br>
 
+if you want to change those then after you run the setup_wifiAp script you can run the following command to edit those values then reboot the pi.
 
+```
+sudo nano /etc/hostapd/hostapd.conf
+```
 
 
 
