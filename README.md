@@ -26,7 +26,7 @@ sudo apt install git -y
 clone this repo and enter the cloned directory
 
 ```
-git clone https://github.com/stooged/PS5-PI-Server
+sudo git clone https://github.com/stooged/PS5-PI-Server
 cd PS5-PI-Server
 ```
 
@@ -40,7 +40,7 @@ cd PS5-PI-Server
 run the raspberry pi install script
 
 ```
-chmod 777 install.sh
+sudo chmod 777 install.sh
 sudo ./install.sh
 
 ```
@@ -60,7 +60,7 @@ tested on raspberry pi os lite
 if you happen to have a <a href=https://wiki.radxa.com/Rock4/4cplus>ROCK 4C Plus</a> then you can run this install script
 
 ```
-chmod 777 installrock.sh
+sudo chmod 777 installrock.sh
 sudo ./installrock.sh
 ```
 
@@ -78,7 +78,7 @@ tested on debian bullseye
 if you happen to have a <a href=https://biqu.equipment/en-au/products/bigtreetech-btt-pi-v1-2>BTT Pi</a> then you can run this install script
 
 ```
-chmod 777 installbtt.sh
+sudo chmod 777 installbtt.sh
 sudo ./installbtt.sh
 ```
 
@@ -97,7 +97,7 @@ if you wish to enable samba to access the www folder for the exploit files/paylo
 
 ```
 cd PS5-PI-Server
-chmod 777 setup_Samba.sh
+sudo chmod 777 setup_Samba.sh
 sudo ./setup_Samba.sh
 ```
 
@@ -117,7 +117,7 @@ this setup assumes you are connecting the pi to your home network using an ether
 
 ```
 cd PS5-PI-Server
-chmod 777 setup_wifiAP.sh
+sudo chmod 777 setup_wifiAP.sh
 sudo ./setup_wifiAP.sh
 ```
 
