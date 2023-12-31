@@ -85,6 +85,22 @@ tested on debian 11 minimal
 
 
 
+### Samba
+<hr>
+
+if you wish to enable samba to access the www folder for the exploit files/payloads then run this script.
+
+
+```
+cd PS5-PI-Server
+chmod 777 setup_Samba.sh
+sudo ./setup_Samba.sh
+```
+
+once completed you can access the drive on \\ps5.local\www or smb:\\ps5.local\www<br>
+the share has no user/password required to access it.
+
+<br><br>
 
 
 ### Wifi AP
@@ -111,7 +127,7 @@ if you want to change those then after you run the setup_wifiAp script you can r
 sudo nano /etc/hostapd/hostapd.conf
 ```
 
-
+<br><br>
 
 ## Console DNS
 
