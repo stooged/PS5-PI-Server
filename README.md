@@ -85,11 +85,31 @@ tested on debian 11 minimal
 
 
 
-## Console
 
-once the pi reboots you should be able to access it on http://ps5.local
 
-edit the dns settings on your ps5 to the ip of the pi and you can then go to the user guide to run the exploit.
+### Wifi AP
+<hr>
+
+
+if you want to connect the console directly to the pi using wifi then you can setup a wifi access point on the pi
+
+
+```
+cd PS5-PI-Server
+chmod 777 setup_wifiAP.sh
+sudo ./setup_wifiAP.sh
+```
+
+
+
+
+
+
+## Console DNS
+
+you should be able to access the exploit page on http://ps5.local
+
+if you are not using the wifi AP then edit the dns settings on your ps5 to the ip of the pi and you can then go to the user guide to run the exploit.
 
 
 
