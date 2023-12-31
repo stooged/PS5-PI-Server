@@ -9,7 +9,7 @@ it is using <a href=https://github.com/idlesauce/PS5-Exploit-Host>PS5-Exploit-Ho
 
 ## Repo Setup
 
-install an os like Raspberry Pi OS Lite
+install an os onto the pi preferably a minimal or lite version(no desktop environment).
 
 boot up the pi and set your credentials then use putty or something similar to access ssh.
 
