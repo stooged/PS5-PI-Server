@@ -1,7 +1,6 @@
 #!/bin/bash
 
 sudo apt install hostapd dhcpcd dnsmasq iptables nginx -y
-sudo apt-get install nginx -y
 sudo sed -i 's/#domain-needed/domain-needed/g' /etc/dnsmasq.conf
 sudo sed -i 's/#bogus-priv/bogus-priv/g' /etc/dnsmasq.conf
 sudo sed -i 's/#expand-hosts/expand-hosts/g' /etc/dnsmasq.conf
