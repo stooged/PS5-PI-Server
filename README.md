@@ -1,7 +1,7 @@
 # PS5 PI Server
 
 
-this is an install script to setup a dns server(blocker), web server, wifi access point and a exploit host on a raspberry pi, rock pi or btt pi.
+this is an install script to setup a dns server(blocker), web server, wifi access point and a exploit host on a raspberry pi or rock pi.
 
 
 it is using <a href=https://github.com/idlesauce/PS5-Exploit-Host>PS5-Exploit-Host</a> by idlesauce.
@@ -69,23 +69,6 @@ tested on debian bullseye
 
 <br><br>
 
-
-
-### BTT PI
-<hr>
-
-
-if you happen to have a <a href=https://biqu.equipment/en-au/products/bigtreetech-btt-pi-v1-2>BTT Pi</a> then you can run this install script
-
-```
-sudo chmod 777 installbtt.sh
-sudo ./installbtt.sh
-```
-
-tested on debian 11 minimal
-<a href=https://github.com/bigtreetech/CB1/releases/download/V2.3.3/CB1_Debian11_minimal_kernel5.16_20230712.img.xz>CB1_Debian11_minimal_kernel5.16_20230712.img.xz</a>
-
-<br><br>
 
 
 
