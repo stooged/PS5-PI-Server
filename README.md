@@ -1,7 +1,7 @@
 # PS5 PI Server
 
 
-this is an install script to setup a dns server(blocker), web server and a exploit host on a raspberry pi, rock pi or btt pi.
+this is an install script to setup a dns server(blocker), web server, wifi access point and a exploit host on a raspberry pi, rock pi or btt pi.
 
 
 it is using <a href=https://github.com/idlesauce/PS5-Exploit-Host>PS5-Exploit-Host</a> by idlesauce.
@@ -111,21 +111,11 @@ the share has no user/password required to access it.
 <hr>
 
 
-if you want to connect the console directly to the pi using wifi then you can setup a wifi access point on the pi.<br>
-this setup assumes you are connecting the pi to your home network using an ethernet cable not wifi.
-
-
-```
-cd PS5-PI-Server
-sudo chmod 777 setup_wifiAP.sh
-sudo ./setup_wifiAP.sh
-```
-
 the default settings are<br>
 ssid=PS5_WEB_AP<br>
 wpa_passphrase=password<br>
 
-if you want to change those then after you run the setup_wifiAp script you can run the following command to edit those values then reboot the pi.
+if you want to change those settings you can run the following command to edit those values then reboot the pi.
 
 ```
 sudo nano /etc/hostapd/hostapd.conf
