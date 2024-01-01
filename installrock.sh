@@ -1,7 +1,6 @@
 #!/bin/bash
 
-sudo apt install dnsmasq -y
-sudo apt-get install nginx -y
+sudo apt install hostapd dhcpcd5 dnsmasq iptables nginx net-tools -y
 sudo sed -i 's/#domain-needed/domain-needed/g' /etc/dnsmasq.conf
 sudo sed -i 's/#bogus-priv/bogus-priv/g' /etc/dnsmasq.conf
 sudo sed -i 's/#expand-hosts/expand-hosts/g' /etc/dnsmasq.conf
@@ -37,8 +36,39 @@ sudo service dnsmasq restart' | sudo tee -a /etc/dstart.sh
 sudo cp -r document /var/www/html/
 sudo touch /var/www/html/index.html
 echo "<html><meta HTTP-EQUIV='REFRESH' content='0; url=/document/index.html'></html>" | sudo tee -a /var/www/html/index.html
-sudo sed -i 's^"exit 0"^^g' /etc/rc.local
-sudo sed -i 's^exit 0^sudo bash ./etc/dstart.sh \& \n\nexit 0^g' /etc/rc.local
+echo '[Unit]
+Description=/etc/rc.local
+ConditionPathExists=/etc/rc.local
+ 
+[Service]
+Type=forking
+ExecStart=/etc/rc.local start
+TimeoutSec=0
+StandardOutput=tty
+RemainAfterExit=yes
+SysVStartPriority=99
+ 
+[Install]
+WantedBy=multi-user.target' | sudo tee -a /etc/systemd/system/rc-local.service
+echo '#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+sudo bash ./etc/dstart.sh &
+sudo bash ./etc/startap.sh &
+
+exit 0' | sudo tee -a /etc/rc.local
+sudo chmod +x /etc/rc.local
+sudo systemctl enable rc-local
 sudo rm /etc/dnsmasq.more.conf
 IP=$(hostname -I | cut -f1 -d' ')
 echo "address=/playstation.com/127.0.0.1
@@ -62,6 +92,35 @@ sudo sed -i 's^rock-4c-plus^ps5^g' /etc/hostname
 sudo systemctl stop systemd-resolved
 sudo systemctl disable systemd-resolved
 sudo systemctl mask systemd-resolved
+echo -e "\r\ninterface wap0
+    static ip_address=10.0.0.1/24
+    nohook wpa_supplicant" | sudo tee -a /etc/dhcpcd.conf
+echo -e "\r\ninterface=wap0\r\ndhcp-range=10.0.0.2,10.0.0.20,255.255.255.0,24h" | sudo tee -a /etc/dnsmasq.conf
+echo "country_code=US
+interface=wap0
+ssid=PS5_WEB_AP
+channel=9
+auth_algs=1
+wpa=2
+wpa_passphrase=password
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP CCMP
+rsn_pairwise=CCMP" | sudo tee -a /etc/hostapd/hostapd.conf
+echo "DAEMON_CONF=\"/etc/hostapd/hostapd.conf\"" | sudo tee -a /etc/default/hostapd
+echo '#!/bin/bash
+sudo systemctl stop hostapd.service
+sudo systemctl stop dnsmasq.service
+sudo systemctl stop dhcpcd.service
+sudo iw dev wap0 del
+sudo iw dev wlan0 interface add wap0 type __ap
+sudo sysctl net.ipv4.ip_forward=1
+sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 ! -d 10.0.0.0/24 -j MASQUERADE
+sudo ifconfig wap0 up
+sudo systemctl start hostapd.service
+sudo systemctl start dhcpcd.service
+sudo systemctl start dnsmasq.service' | sudo tee -a /etc/startap.sh
+sudo systemctl unmask hostapd
+sudo systemctl enable hostapd
 echo "Install complete, Rebooting"
 sudo reboot
 
