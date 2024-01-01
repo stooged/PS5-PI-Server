@@ -37,7 +37,7 @@ cd PS5-PI-Server
 ### Raspberry PI
 <hr>
 
-run the raspberry pi install script
+if you have a raspberry pi run this install script
 
 ```
 sudo chmod 777 install.sh
@@ -57,7 +57,7 @@ tested on raspberry pi os lite
 <hr>
 
 
-if you happen to have a <a href=https://wiki.radxa.com/Rock4/4cplus>ROCK 4C Plus</a> then you can run this install script
+if you have a <a href=https://wiki.radxa.com/Rock4/4cplus>ROCK 4C Plus</a> run this install script
 
 ```
 sudo chmod 777 installrock.sh
