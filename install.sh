@@ -183,6 +183,7 @@ esac
 done
 sudo systemctl unmask hostapd
 sudo systemctl enable hostapd
+sudo update-rc.d hostapd disable
 sudo sed -i 's^raspberrypi^ps5^g' /etc/hosts
 sudo sed -i 's^raspberrypi^ps5^g' /etc/hostname
 echo "Install complete, Rebooting"
