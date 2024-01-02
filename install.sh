@@ -128,6 +128,8 @@ force directory mask = 0777
 force user = root
 force group = root
 public=yes" | sudo tee -a /etc/samba/smb.conf
+sudo systemctl unmask smbd
+sudo systemctl enable smbd
 echo "Samba installed"
 break;;
 [Nn]* ) echo "Skipping SAMBA install"
@@ -141,14 +143,3 @@ sudo sed -i 's^raspberrypi^ps5^g' /etc/hosts
 sudo sed -i 's^raspberrypi^ps5^g' /etc/hostname
 echo "Install complete, Rebooting"
 sudo reboot
-
-
-
-
-
-
-
-
-
-
-
