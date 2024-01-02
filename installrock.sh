@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [$HOSTNAME == "ps5"]; then
-    echo "You have run this script already, you cannot run it again"
-	exit;
+if [[ $(hostname) == "ps5" ]] ;then
+echo "You have run this script already, you cannot run it again"
+exit;
 fi
 sudo apt install hostapd dhcpcd5 dnsmasq iptables nginx net-tools -y
 sudo sed -i 's/#domain-needed/domain-needed/g' /etc/dnsmasq.conf
