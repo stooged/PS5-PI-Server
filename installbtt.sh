@@ -152,17 +152,17 @@ read -p "$(printf '\r\n\r\nDo you want to install a FTP server? (Y|N): ')" ftpq
 case $ftpq in
 [Yy]* ) 
 sudo apt-get install vsftpd -y
+USR=$(sudo groupmems -g users -l | cut -f1 -d' ')
 echo "anonymous_enable=NO
 local_enable=YES
 write_enable=YES
 local_umask=077
 allow_writeable_chroot=YES
 chroot_local_user=YES
-user_sub_token=$USER
+user_sub_token=$USR
 local_root=/var/www/html" | sudo tee -a /etc/vsftpd.conf
 sudo chmod 775 /var/www/html/
 sudo sed -i 's^exit 0^^g' /etc/rc.local
-USR=$(users | cut -f1 -d' ')
 echo -e "sudo chown -R "$USR":"$USR" /var/www/html/\n\nexit 0" | sudo tee -a /etc/rc.local
 echo "FTP Installed"
 break;;

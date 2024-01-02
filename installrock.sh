@@ -225,8 +225,9 @@ break;;
 * ) echo "Please answer Y or N";;
 esac
 done
-sudo sed -i 's^rock-4c-plus^ps5^g' /etc/hosts
-sudo sed -i 's^rock-4c-plus^ps5^g' /etc/hostname
+HSTN=$(hostname | cut -f1 -d' ')
+sudo sed -i "s^$HSTN^ps5^g" /etc/hosts
+sudo sed -i "s^$HSTN^ps5^g" /etc/hostname
 sudo systemctl stop systemd-resolved
 sudo systemctl disable systemd-resolved
 sudo systemctl mask systemd-resolved
