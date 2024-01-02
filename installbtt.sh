@@ -64,11 +64,11 @@ while true; do
 read -p "$(printf '\r\n\r\nDo you want to setup a WIFI access point? (Y|N): ')" wapq
 case $wapq in
 [Yy]* ) 
-sudo apt install hostapd dhcpcd iptables -y
-echo -e "\r\ninterface wap0
+sudo apt install hostapd dhcpcd iptables net-tools -y
+echo -e "\r\ninterface wlan0
     static ip_address=10.0.0.1/24
     nohook wpa_supplicant" | sudo tee -a /etc/dhcpcd.conf
-echo -e "\r\ninterface=wap0\r\ndhcp-range=10.0.0.2,10.0.0.20,255.255.255.0,24h" | sudo tee -a /etc/dnsmasq.conf
+echo -e "\r\ninterface=wlan0\r\ndhcp-range=10.0.0.2,10.0.0.20,255.255.255.0,24h" | sudo tee -a /etc/dnsmasq.conf
 while true; do
 read -p "$(printf '\r\n\r\nDo you want to set a SSID and password for the wifi access point?\r\nif you select no then these defaults will be used\r\n\r\nSSID=PS5_WEB_AP\r\nPASS=password\r\n\r\n(Y|N)?: ')" wapset
 case $wapset in
@@ -114,7 +114,7 @@ break;;
 esac
 done
 echo "country_code=US
-interface=wap0
+interface=wlan0
 ssid="$APSSID"
 channel=9
 auth_algs=1
@@ -128,18 +128,15 @@ echo '#!/bin/bash
 sudo systemctl stop hostapd.service
 sudo systemctl stop dnsmasq.service
 sudo systemctl stop dhcpcd.service
-sudo iw dev wap0 del
-sudo iw dev wlan0 interface add wap0 type __ap
 sudo sysctl net.ipv4.ip_forward=1
 sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 ! -d 10.0.0.0/24 -j MASQUERADE
-sudo ifconfig wap0 up
+sudo ifconfig wlan0 up
 sudo systemctl start hostapd.service
 sudo systemctl start dhcpcd.service
 sudo systemctl start dnsmasq.service' | sudo tee -a /etc/startap.sh
 sudo sed -i 's^exit 0^sudo bash ./etc/startap.sh \& \n\nexit 0^g' /etc/rc.local
 sudo systemctl unmask hostapd
 sudo systemctl enable hostapd
-sudo update-rc.d hostapd disable
 echo "Wifi AP installed"
 break;;
 [Nn]* ) echo "Skipping Wifi AP install"
