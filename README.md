@@ -1,7 +1,7 @@
 # PS5 PI Server
 
 
-this is an install script to setup a dns server(blocker), web server, wifi access point and a exploit host on a raspberry pi or rock pi.
+this is an install script to setup a dns server(blocker), web server, wifi access point and a exploit host on a raspberry pi or rock pi.<br>
 the script will prompt you to install a ftp server and setup a samba share to access the exploit/payload files.<br>
 you can setup either one or both or none at all.<br>
 
