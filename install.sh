@@ -4,7 +4,7 @@ if [[ $(hostname) == "ps5" ]] ;then
 echo "You have run this script already, you cannot run it again"
 exit;
 fi
-sudo apt install hostapd dhcpcd dnsmasq iptables nginx -y
+sudo apt install dnsmasq nginx -y
 sudo sed -i 's/#domain-needed/domain-needed/g' /etc/dnsmasq.conf
 sudo sed -i 's/#bogus-priv/bogus-priv/g' /etc/dnsmasq.conf
 sudo sed -i 's/#expand-hosts/expand-hosts/g' /etc/dnsmasq.conf
@@ -60,6 +60,11 @@ address=/ribob01.net/127.0.0.1
 address=/cddbp.net/127.0.0.1
 address=/nintendo.net/127.0.0.1
 address=/ea.com/127.0.0.1" | sudo tee -a /etc/dnsmasq.more.conf
+while true; do
+read -p "$(printf '\r\n\r\nDo you want to setup a WIFI access point? (Y|N): ')" wapq
+case $wapq in
+[Yy]* ) 
+sudo apt install hostapd dhcpcd iptables -y
 echo -e "\r\ninterface wap0
     static ip_address=10.0.0.1/24
     nohook wpa_supplicant" | sudo tee -a /etc/dhcpcd.conf
@@ -132,6 +137,16 @@ sudo systemctl start hostapd.service
 sudo systemctl start dhcpcd.service
 sudo systemctl start dnsmasq.service' | sudo tee -a /etc/startap.sh
 sudo sed -i 's^exit 0^sudo bash ./etc/startap.sh \& \n\nexit 0^g' /etc/rc.local
+sudo systemctl unmask hostapd
+sudo systemctl enable hostapd
+sudo update-rc.d hostapd disable
+echo "Wifi AP installed"
+break;;
+[Nn]* ) echo "Skipping Wifi AP install"
+break;;
+* ) echo "Please awnser Y or N";;
+esac
+done
 while true; do
 read -p "$(printf '\r\n\r\nDo you want to install a FTP server? (Y|N): ')" ftpq
 case $ftpq in
@@ -181,9 +196,6 @@ break;;
 * ) echo "Please awnser Y or N";;
 esac
 done
-sudo systemctl unmask hostapd
-sudo systemctl enable hostapd
-sudo update-rc.d hostapd disable
 sudo sed -i 's^raspberrypi^ps5^g' /etc/hosts
 sudo sed -i 's^raspberrypi^ps5^g' /etc/hostname
 echo "Install complete, Rebooting"
