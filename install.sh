@@ -65,7 +65,7 @@ echo -e "\r\ninterface wap0
     nohook wpa_supplicant" | sudo tee -a /etc/dhcpcd.conf
 echo -e "\r\ninterface=wap0\r\ndhcp-range=10.0.0.2,10.0.0.20,255.255.255.0,24h" | sudo tee -a /etc/dnsmasq.conf
 while true; do
-read -p "$(printf 'Do you wish to set a SSID and password for the wifi access point?\r\nif you select no then these defaults will be used\r\n\r\nSSID=PS5_WEB_AP\r\nPASS=password\r\n\r\n(Y|N)?: ')" wapset
+read -p "$(printf '\r\n\r\nDo you wish to set a SSID and password for the wifi access point?\r\nif you select no then these defaults will be used\r\n\r\nSSID=PS5_WEB_AP\r\nPASS=password\r\n\r\n(Y|N)?: ')" wapset
 case $wapset in
 [Yy]* ) 
 while true; do
@@ -75,7 +75,11 @@ case $APSSID in
  echo "Cannot be empty!";;
  * )  
 if grep -q '^[0-9a-zA-Z_ -]*$' <<<$APSSID ; then 
+if [ ${#APSSID} -le 1 ]  || [ ${#APSSID} -ge 33 ] ; then
+echo "SSID must be between 2 and 32 characters long";
+else 
 break;
+fi
 else 
 echo "SSID must only contain alphanumeric characters"; 
 fi
@@ -87,7 +91,11 @@ case $APPSWD in
 "" ) 
  echo "Cannot be empty!";;
  * )  
- break;;
+if [ ${#APPSWD} -le 7 ]  || [ ${#APPSWD} -ge 64 ] ; then
+echo "Password must be between 8 and 63 characters long";
+else 
+break;
+fi
 esac
 done
 echo -e 'Using custom settings\r\n\r\nSSID='$APSSID'\r\nPASS='$APPSWD'\r\n\r\n'
@@ -125,7 +133,7 @@ sudo systemctl start dhcpcd.service
 sudo systemctl start dnsmasq.service' | sudo tee -a /etc/startap.sh
 sudo sed -i 's^exit 0^sudo bash ./etc/startap.sh \& \n\nexit 0^g' /etc/rc.local
 while true; do
-read -p "Do you wish to install a FTP server? (Y|N) " ftpq
+read -p "$(printf '\r\n\r\nDo you wish to install a FTP server? (Y|N): ')" ftpq
 case $ftpq in
 [Yy]* ) 
 sudo apt-get install vsftpd -y
@@ -149,7 +157,7 @@ break;;
 esac
 done
 while true; do
-read -p "Do you wish to setup a SAMBA share? (Y|N) " smbq
+read -p "$(printf '\r\n\r\nDo you wish to setup a SAMBA share? (Y|N): ')" smbq
 case $smbq in
 [Yy]* ) 
 sudo apt-get install samba samba-common-bin -y
