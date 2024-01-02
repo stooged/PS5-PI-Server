@@ -96,7 +96,7 @@ echo -e "\r\ninterface wap0
     nohook wpa_supplicant" | sudo tee -a /etc/dhcpcd.conf
 echo -e "\r\ninterface=wap0\r\ndhcp-range=10.0.0.2,10.0.0.20,255.255.255.0,24h" | sudo tee -a /etc/dnsmasq.conf
 while true; do
-read -p "$(printf '\r\n\r\nDo you wish to set a SSID and password for the wifi access point?\r\nif you select no then these defaults will be used\r\n\r\nSSID=PS5_WEB_AP\r\nPASS=password\r\n\r\n(Y|N)?: ')" wapset
+read -p "$(printf '\r\n\r\nDo you want to set a SSID and password for the wifi access point?\r\nif you select no then these defaults will be used\r\n\r\nSSID=PS5_WEB_AP\r\nPASS=password\r\n\r\n(Y|N)?: ')" wapset
 case $wapset in
 [Yy]* ) 
 while true; do
@@ -163,7 +163,7 @@ sudo systemctl start hostapd.service
 sudo systemctl start dhcpcd.service
 sudo systemctl start dnsmasq.service' | sudo tee -a /etc/startap.sh
 while true; do
-read -p "$(printf '\r\n\r\nDo you wish to install a FTP server? (Y|N): ')" ftpq
+read -p "$(printf '\r\n\r\nDo you want to install a FTP server? (Y|N): ')" ftpq
 case $ftpq in
 [Yy]* ) 
 sudo apt-get install vsftpd -y
@@ -187,7 +187,7 @@ break;;
 esac
 done
 while true; do
-read -p "$(printf '\r\n\r\nDo you wish to setup a SAMBA share? (Y|N): ')" smbq
+read -p "$(printf '\r\n\r\nDo you want to setup a SAMBA share? (Y|N): ')" smbq
 case $smbq in
 [Yy]* ) 
 sudo apt-get install samba samba-common-bin -y
