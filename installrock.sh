@@ -59,7 +59,7 @@ echo '#!/bin/sh -e
 # rc.local
 #
 # This script is executed at the end of each multiuser runlevel.
-# Make sure that the script will "exit 0" on success or any other
+# Make sure that the script will "exit" on success or any other
 # value on error.
 #
 # In order to enable or disable this script just change the execution
@@ -119,6 +119,29 @@ sudo systemctl start hostapd.service
 sudo systemctl start dhcpcd.service
 sudo systemctl start dnsmasq.service' | sudo tee -a /etc/startap.sh
 while true; do
+read -p "Do you wish to install a FTP server? (Y|N) " ftpq
+case $ftpq in
+[Yy]* ) 
+sudo apt-get install vsftpd -y
+echo "anonymous_enable=NO
+local_enable=YES
+write_enable=YES
+local_umask=077
+allow_writeable_chroot=YES
+chroot_local_user=YES
+user_sub_token=$USER
+local_root=/var/www/html" | sudo tee -a /etc/vsftpd.conf
+sudo chmod 775 /var/www/html/
+sudo chown -R $USER:$USER /var/www/html/
+sudo sed -i 's^exit 0^sudo chown -R $USER:$USER /var/www/html/\n\nexit 0^g' /etc/rc.local
+echo "FTP Installed"
+break;;
+[Nn]* ) echo "Skipping FTP install"
+break;;
+* ) echo "Please awnser Y or N";;
+esac
+done
+while true; do
 read -p "Do you wish to setup a SAMBA share? (Y|N) " smbq
 case $smbq in
 [Yy]* ) 
@@ -134,31 +157,10 @@ force directory mask = 0777
 force user = root
 force group = root
 public=yes" | sudo tee -a /etc/samba/smb.conf
+sudo sed -i 's^exit 0^sudo systemctl restart smbd\n\nexit 0^g' /etc/rc.local
 echo "Samba installed"
 break;;
 [Nn]* ) echo "Skipping SAMBA install"
-break;;
-* ) echo "Please awnser Y or N";;
-esac
-done
-while true; do
-read -p "Do you wish to install a FTP server? (Y|N) " ftpq
-case $ftpq in
-[Yy]* ) 
-sudo apt-get install vsftpd -y
-echo "anonymous_enable=NO
-local_enable=YES
-write_enable=YES
-local_umask=077
-allow_writeable_chroot=YES
-chroot_local_user=YES
-user_sub_token=$USER
-local_root=/var/www/html" | sudo tee -a /etc/vsftpd.conf
-sudo chmod 775 /var/www/html/
-sudo chown -R $USER:$USER /var/www/html/
-echo "FTP Installed"
-break;;
-[Nn]* ) echo "Skipping FTP install"
 break;;
 * ) echo "Please awnser Y or N";;
 esac
@@ -172,14 +174,3 @@ sudo systemctl disable systemd-resolved
 sudo systemctl mask systemd-resolved
 echo "Install complete, Rebooting"
 sudo reboot
-
-
-
-
-
-
-
-
-
-
-
