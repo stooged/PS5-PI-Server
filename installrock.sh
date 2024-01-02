@@ -132,8 +132,8 @@ chroot_local_user=YES
 user_sub_token=$USER
 local_root=/var/www/html" | sudo tee -a /etc/vsftpd.conf
 sudo chmod 775 /var/www/html/
-sudo chown -R $USER:$USER /var/www/html/
-sudo sed -i 's^exit 0^sudo chown -R $USER:$USER /var/www/html/\n\nexit 0^g' /etc/rc.local
+sudo sed -i 's^exit 0^^g' /etc/rc.local
+echo -e "sudo chown -R "$USER":"$USER" /var/www/html/\n\nexit 0" | sudo tee -a /etc/rc.local
 echo "FTP Installed"
 break;;
 [Nn]* ) echo "Skipping FTP install"
@@ -157,7 +157,6 @@ force directory mask = 0777
 force user = root
 force group = root
 public=yes" | sudo tee -a /etc/samba/smb.conf
-sudo sed -i 's^exit 0^sudo systemctl restart smbd\n\nexit 0^g' /etc/rc.local
 echo "Samba installed"
 break;;
 [Nn]* ) echo "Skipping SAMBA install"
