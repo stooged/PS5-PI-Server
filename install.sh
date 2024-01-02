@@ -88,31 +88,6 @@ sudo systemctl start hostapd.service
 sudo systemctl start dhcpcd.service
 sudo systemctl start dnsmasq.service' | sudo tee -a /etc/startap.sh
 sudo sed -i 's^exit 0^sudo bash ./etc/startap.sh \& \n\nexit 0^g' /etc/rc.local
-sudo systemctl unmask hostapd
-sudo systemctl enable hostapd
-while true; do
-read -p "Do you wish to install a FTP server? (Y|N) " ftpq
-case $ftpq in
-[Yy]* ) 
-sudo apt-get install vsftpd -y
-echo "anonymous_enable=NO
-local_enable=YES
-write_enable=YES
-local_umask=077
-allow_writeable_chroot=YES
-chroot_local_user=YES
-user_sub_token=$USER
-local_root=/var/www/html" | sudo tee -a /etc/vsftpd.conf
-sudo chmod 775 /var/www/html/
-sudo chown -R $USER:$USER /var/www/html/
-sudo systemctl restart vsftpd
-echo "FTP Installed"
-break;;
-[Nn]* ) echo "Skipping FTP install"
-break;;
-* ) echo "Please awnser Y or N";;
-esac
-done
 while true; do
 read -p "Do you wish to setup a SAMBA share? (Y|N) " smbq
 case $smbq in
@@ -129,7 +104,6 @@ force directory mask = 0777
 force user = root
 force group = root
 public=yes" | sudo tee -a /etc/samba/smb.conf
-sudo systemctl restart smbd
 echo "Samba installed"
 break;;
 [Nn]* ) echo "Skipping SAMBA install"
@@ -137,6 +111,30 @@ break;;
 * ) echo "Please awnser Y or N";;
 esac
 done
+while true; do
+read -p "Do you wish to install a FTP server? (Y|N) " ftpq
+case $ftpq in
+[Yy]* ) 
+sudo apt-get install vsftpd -y
+echo "anonymous_enable=NO
+local_enable=YES
+write_enable=YES
+local_umask=077
+allow_writeable_chroot=YES
+chroot_local_user=YES
+user_sub_token=$USER
+local_root=/var/www/html" | sudo tee -a /etc/vsftpd.conf
+sudo chmod 775 /var/www/html/
+sudo chown -R $USER:$USER /var/www/html/
+echo "FTP Installed"
+break;;
+[Nn]* ) echo "Skipping FTP install"
+break;;
+* ) echo "Please awnser Y or N";;
+esac
+done
+sudo systemctl unmask hostapd
+sudo systemctl enable hostapd
 sudo sed -i 's^raspberrypi^ps5^g' /etc/hosts
 sudo sed -i 's^raspberrypi^ps5^g' /etc/hostname
 echo "Install complete, Rebooting"
