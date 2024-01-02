@@ -60,8 +60,6 @@ address=/ribob01.net/127.0.0.1
 address=/cddbp.net/127.0.0.1
 address=/nintendo.net/127.0.0.1
 address=/ea.com/127.0.0.1" | sudo tee -a /etc/dnsmasq.more.conf
-sudo sed -i 's^raspberrypi^ps5^g' /etc/hosts
-sudo sed -i 's^raspberrypi^ps5^g' /etc/hostname
 echo -e "\r\ninterface wap0
     static ip_address=10.0.0.1/24
     nohook wpa_supplicant" | sudo tee -a /etc/dhcpcd.conf
@@ -139,6 +137,8 @@ break;;
 * ) echo "Please awnser Y or N";;
 esac
 done
+sudo sed -i 's^raspberrypi^ps5^g' /etc/hosts
+sudo sed -i 's^raspberrypi^ps5^g' /etc/hostname
 echo "Install complete, Rebooting"
 sudo reboot
 
