@@ -70,21 +70,18 @@ tested on debian bullseye
 <br><br>
 
 
+### FTP
+<hr>
+
+if you install FTP to access the www folder for the exploit files/payloads you can use your pi login user/pass to access the server.<br>
+
+<br><br>
 
 
 ### Samba
 <hr>
 
-if you wish to enable samba to access the www folder for the exploit files/payloads then run this script.
-
-
-```
-cd PS5-PI-Server
-sudo chmod 777 setup_Samba.sh
-sudo ./setup_Samba.sh
-```
-
-once completed you can access the drive on \\\ps5.local\www or smb:\\\ps5.local\www<br>
+if you setup samba to access the www folder for the exploit files/payloads you can access the drive on \\\ps5.local\www or smb:\\\ps5.local\www<br>
 the share has no user/password required to access it.
 
 <br><br>
