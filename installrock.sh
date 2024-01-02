@@ -133,7 +133,8 @@ user_sub_token=$USER
 local_root=/var/www/html" | sudo tee -a /etc/vsftpd.conf
 sudo chmod 775 /var/www/html/
 sudo sed -i 's^exit 0^^g' /etc/rc.local
-echo -e "sudo chown -R "$USER":"$USER" /var/www/html/\n\nexit 0" | sudo tee -a /etc/rc.local
+USR=$(users | cut -f1 -d' ')
+echo -e "sudo chown -R "$USR":"$USR" /var/www/html/\n\nexit 0" | sudo tee -a /etc/rc.local
 echo "FTP Installed"
 break;;
 [Nn]* ) echo "Skipping FTP install"
