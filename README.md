@@ -2,6 +2,8 @@
 
 
 this is an install script to setup a dns server(blocker), web server, wifi access point and a exploit host on a raspberry pi or rock pi.
+the script will prompt you to install a ftp server and setup a samba share to access the exploit/payload files.<br>
+you can setup either one or both or none at all.<br>
 
 
 it is using <a href=https://github.com/idlesauce/PS5-Exploit-Host>PS5-Exploit-Host</a> by idlesauce.
@@ -11,9 +13,9 @@ it is using <a href=https://github.com/idlesauce/PS5-Exploit-Host>PS5-Exploit-Ho
 
 install an os onto the pi preferably a minimal or lite version(no desktop environment).
 
-boot up the pi and set your credentials then use <a href=http://putty.org>putty</a> or something similar to access ssh.
+boot up the pi and set your credentials then login using a keyboard/screen on the pi or use <a href=http://putty.org>putty</a> or something similar to access ssh remotely.
 
-once in ssh run the following commands:
+run the following commands:
 
 
 install git
