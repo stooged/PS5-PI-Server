@@ -92,12 +92,12 @@ the share has no user/password required to access it.
 ### Wifi AP
 <hr>
 
+if you do not set the SSID and password during the install the default settings are<br>
 
-the default settings are<br>
 ssid=PS5_WEB_AP<br>
 wpa_passphrase=password<br>
 
-if you want to change those settings you can run the following command to edit those values then reboot the pi.
+if you want to change those settings you can run the following command to edit those values then reboot the pi for the changes to take effect.
 
 ```
 sudo nano /etc/hostapd/hostapd.conf

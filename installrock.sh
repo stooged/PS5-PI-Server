@@ -95,13 +95,49 @@ echo -e "\r\ninterface wap0
     static ip_address=10.0.0.1/24
     nohook wpa_supplicant" | sudo tee -a /etc/dhcpcd.conf
 echo -e "\r\ninterface=wap0\r\ndhcp-range=10.0.0.2,10.0.0.20,255.255.255.0,24h" | sudo tee -a /etc/dnsmasq.conf
+while true; do
+read -p "$(printf 'Do you wish to set a SSID and password for the wifi access point?\r\nif you select no then these defaults will be used\r\n\r\nSSID=PS5_WEB_AP\r\nPASS=password\r\n\r\n(Y|N)?: ')" wapset
+case $wapset in
+[Yy]* ) 
+while true; do
+read -p "Enter SSID: " APSSID
+case $APSSID in
+"" ) 
+ echo "Cannot be empty!";;
+ * )  
+if grep -q '^[0-9a-zA-Z_ -]*$' <<<$APSSID ; then 
+break;
+else 
+echo "SSID must only contain alphanumeric characters"; 
+fi
+esac
+done
+while true; do
+read -p "Enter password: " APPSWD
+case $APPSWD in
+"" ) 
+ echo "Cannot be empty!";;
+ * )  
+ break;;
+esac
+done
+echo -e 'Using custom settings\r\n\r\nSSID='$APSSID'\r\nPASS='$APPSWD'\r\n\r\n'
+break;;
+[Nn]* ) 
+ echo -e 'Using default settings\r\n\r\nSSID=PS5_WEB_AP\r\nPASS=password\r\n\r\n'
+ APSSID="PS5_WEB_AP"
+ APPSWD="password"
+break;;
+* ) echo "Please awnser Y or N";;
+esac
+done
 echo "country_code=US
 interface=wap0
-ssid=PS5_WEB_AP
+ssid="$APSSID"
 channel=9
 auth_algs=1
 wpa=2
-wpa_passphrase=password
+wpa_passphrase="$APPSWD"
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP CCMP
 rsn_pairwise=CCMP" | sudo tee -a /etc/hostapd/hostapd.conf
