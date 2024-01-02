@@ -99,6 +99,10 @@ wpa_passphrase=password<br>
 
 if you want to change those settings you can run the following command to edit those values then reboot the pi for the changes to take effect.
 
+the SSID must be between 2 and 32 characters long.<br>
+the password must be between 8 and 63 characters long.<br>
+
+
 ```
 sudo nano /etc/hostapd/hostapd.conf
 ```
