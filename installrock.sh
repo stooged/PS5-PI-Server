@@ -141,7 +141,7 @@ break;;
  APSSID="PS5_WEB_AP"
  APPSWD="password"
 break;;
-* ) echo "Please awnser Y or N";;
+* ) echo "Please answer Y or N";;
 esac
 done
 echo "country_code=US
@@ -173,7 +173,7 @@ echo "Wifi AP installed"
 break;;
 [Nn]* ) echo "Skipping Wifi AP install"
 break;;
-* ) echo "Please awnser Y or N";;
+* ) echo "Please answer Y or N";;
 esac
 done
 while true; do
@@ -197,7 +197,7 @@ echo "FTP Installed"
 break;;
 [Nn]* ) echo "Skipping FTP install"
 break;;
-* ) echo "Please awnser Y or N";;
+* ) echo "Please answer Y or N";;
 esac
 done
 while true; do
@@ -222,7 +222,7 @@ echo "Samba installed"
 break;;
 [Nn]* ) echo "Skipping SAMBA install"
 break;;
-* ) echo "Please awnser Y or N";;
+* ) echo "Please answer Y or N";;
 esac
 done
 sudo sed -i 's^rock-4c-plus^ps5^g' /etc/hosts
