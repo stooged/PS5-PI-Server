@@ -65,10 +65,10 @@ read -p "$(printf '\r\n\r\nDo you want to setup a WIFI access point? (Y|N): ')" 
 case $wapq in
 [Yy]* ) 
 sudo apt install dhcpcd iptables net-tools -y
-echo -e "\r\ninterface wlan0
+echo -e "\r\ninterface wlan1
     static ip_address=10.0.0.1/24
     nohook wpa_supplicant" | sudo tee -a /etc/dhcpcd.conf
-echo -e "\r\ninterface=wlan0\r\ndhcp-range=10.0.0.2,10.0.0.20,255.255.255.0,24h" | sudo tee -a /etc/dnsmasq.conf
+echo -e "\r\ninterface=wlan1\r\ndhcp-range=10.0.0.2,10.0.0.20,255.255.255.0,24h" | sudo tee -a /etc/dnsmasq.conf
 while true; do
 read -p "$(printf '\r\n\r\nDo you want to set a SSID and password for the wifi access point?\r\nif you select no then these defaults will be used\r\n\r\nSSID=PS5_WEB_AP\r\nPASS=password\r\n\r\n(Y|N)?: ')" wapset
 case $wapset in
@@ -114,7 +114,6 @@ break;;
 esac
 done
 echo '#!/bin/bash
-sleep 10
 sudo systemctl stop dnsmasq.service
 sudo systemctl stop dhcpcd.service
 sudo sysctl net.ipv4.ip_forward=1
