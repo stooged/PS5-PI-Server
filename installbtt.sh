@@ -120,13 +120,17 @@ break;;
 esac
 done
 echo '#!/bin/bash
-sleep 5
+while [ "$(hostname -I)" = "" ]; do
+  sleep 1
+done
+sleep 10
 . /etc/hostapd/hostapd.conf
-nmcli connection delete Hotspot
+sudo nmcli connection delete Hotspot
+sudo rm /etc/NetworkManager/system-connections/*
 sudo systemctl stop dnsmasq.service
 sudo systemctl stop dhcpcd.service
 sudo sysctl net.ipv4.ip_forward=1
-sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 ! -d 10.0.0.0/24 -j MASQUERA>
+sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 ! -d 10.0.0.0/24 -j MASQUERADE
 sudo nmcli dev wifi hotspot ifname wlan1 ssid "$SSID" password "$PASS"
 sudo nmcli device modify wlan1 ipv4.method disabled
 sudo nmcli device modify wlan1 ipv6.method disabled
