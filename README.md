@@ -1,7 +1,7 @@
 # PS5 PI Server
 
 
-this is an install script to setup a dns server(blocker), web server, wifi access point and a exploit host on a raspberry pi or rock pi.<br>
+this is an install script to setup a dns server(blocker), web server, wifi access point and a exploit host on a raspberry pi, rock pi or btt pi.<br>
 the script will prompt you to install a ftp server and setup a samba share to access the exploit/payload files.<br>
 you can setup either one or both or none at all.<br>
 
@@ -51,9 +51,8 @@ sudo ./install.sh
 tested on raspberry pi os lite
 <a href=https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2023-12-11/2023-12-11-raspios-bookworm-arm64-lite.img.xz>2023-12-11-raspios-bookworm-arm64-lite.img.xz</a>
 
+<br><br>
 
-
-<br>
 
 ### Rock PI
 <hr>
@@ -68,6 +67,23 @@ sudo ./installrock.sh
 
 tested on debian bullseye
 <a href=https://github.com/radxa-build/rock-4c-plus/releases/download/b60/rock-4c-plus_debian_bullseye_cli_b60.img.xz>rock-4c-plus_debian_bullseye_cli_b60.img.xz</a>
+
+<br><br>
+
+
+### BTT PI
+<hr>
+
+
+if you have a <a href=https://biqu.equipment/en-au/products/bigtreetech-btt-pi-v1-2>BTT Pi</a> run this install script
+
+```
+chmod 777 installbtt.sh
+sudo ./installbtt.sh
+```
+
+tested on armbian 23.11 bookworm minimal
+<a href=ttps://redirect.armbian.com/bigtreetech-cb1/Bookworm_legacy_minimal>Armbian_23.11.1_Bigtreetech-cb1_bookworm_legacy_6.1.43_minimal.img.xz</a>
 
 <br><br>
 
@@ -107,8 +123,8 @@ sudo nano /etc/hostapd/hostapd.conf
 the SSID must be between 2 and 32 characters long.<br>
 the password must be between 8 and 63 characters long.
 
-
 <br><br>
+
 
 ## Console DNS
 
