@@ -64,7 +64,7 @@ while true; do
 read -p "$(printf '\r\n\r\nDo you want to setup a WIFI access point? (Y|N): ')" wapq
 case $wapq in
 [Yy]* ) 
-sudo apt install hostapd dhcpcd iptables net-tools -y
+sudo apt install dhcpcd iptables net-tools -y
 echo -e "\r\ninterface wlan0
     static ip_address=10.0.0.1/24
     nohook wpa_supplicant" | sudo tee -a /etc/dhcpcd.conf
@@ -79,7 +79,7 @@ case $APSSID in
 "" ) 
  echo "Cannot be empty!";;
  * )  
-if grep -q '^[0-9a-zA-Z_ -]*$' <<<$APSSID ; then 
+if grep -q '^[0-9a-zA-Z_-]*$' <<<$APSSID ; then 
 if [ ${#APSSID} -le 1 ]  || [ ${#APSSID} -ge 33 ] ; then
 echo "SSID must be between 2 and 32 characters long";
 else 
@@ -113,30 +113,18 @@ break;;
 * ) echo "Please answer Y or N";;
 esac
 done
-echo "country_code=US
-interface=wlan0
-ssid="$APSSID"
-channel=9
-auth_algs=1
-wpa=2
-wpa_passphrase="$APPSWD"
-wpa_key_mgmt=WPA-PSK
-wpa_pairwise=TKIP CCMP
-rsn_pairwise=CCMP" | sudo tee -a /etc/hostapd/hostapd.conf
-echo "DAEMON_CONF=\"/etc/hostapd/hostapd.conf\"" | sudo tee -a /etc/default/hostapd
 echo '#!/bin/bash
-sudo systemctl stop hostapd.service
+sleep 10
 sudo systemctl stop dnsmasq.service
 sudo systemctl stop dhcpcd.service
 sudo sysctl net.ipv4.ip_forward=1
 sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 ! -d 10.0.0.0/24 -j MASQUERADE
-sudo ifconfig wlan0 up
-sudo systemctl start hostapd.service
+sudo nmcli dev wifi hotspot ifname wlan1 ssid '$APSSID' password "'$APPSWD'"
+sudo nmcli device modify wlan1 ipv4.method disabled
+sudo nmcli device modify wlan1 ipv6.method disabled
 sudo systemctl start dhcpcd.service
 sudo systemctl start dnsmasq.service' | sudo tee -a /etc/startap.sh
-sudo sed -i 's^exit 0^sudo bash ./etc/startap.sh \& \n\nexit 0^g' /etc/rc.local
-sudo systemctl unmask hostapd
-sudo systemctl enable hostapd
+sudo sed -i 's^exit 0^sudo sh /etc/startap.sh \& \n\nexit 0^g' /etc/rc.local
 echo "Wifi AP installed"
 break;;
 [Nn]* ) echo "Skipping Wifi AP install"

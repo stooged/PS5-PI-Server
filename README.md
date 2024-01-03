@@ -11,7 +11,7 @@ it is using <a href=https://github.com/idlesauce/PS5-Exploit-Host>PS5-Exploit-Ho
 
 ## Repo Setup
 
-install an os onto the pi preferably a minimal or lite version(no desktop environment).
+install an os onto the pi preferably the ones i have tested with as others might not work.
 
 boot up the pi and set your credentials then login using a keyboard/screen on the pi or use <a href=http://putty.org>putty</a> or something similar to access ssh remotely.
 
