@@ -120,13 +120,10 @@ break;;
 esac
 done
 echo '#!/bin/bash
-while [ "$(hostname -I)" = "" ]; do
-  sleep 1
-done
 sleep 10
 . /etc/hostapd/hostapd.conf
 sudo nmcli connection delete Hotspot
-sudo rm /etc/NetworkManager/system-connections/*
+sudo rm /etc/NetworkManager/system-connections/*Hotspot*
 sudo systemctl stop dnsmasq.service
 sudo systemctl stop dhcpcd.service
 sudo sysctl net.ipv4.ip_forward=1
