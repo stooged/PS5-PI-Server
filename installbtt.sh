@@ -64,7 +64,7 @@ while true; do
 read -p "$(printf '\r\n\r\nDo you want to setup a WIFI access point? (Y|N): ')" wapq
 case $wapq in
 [Yy]* ) 
-sudo apt install dhcpcd iptables net-tools -y
+sudo apt install dhcpcd5 iptables net-tools -y
 echo -e "\r\ninterface wlan1
     static ip_address=10.0.0.1/24
     nohook wpa_supplicant" | sudo tee -a /etc/dhcpcd.conf
