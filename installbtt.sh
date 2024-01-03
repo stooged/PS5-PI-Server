@@ -131,6 +131,7 @@ sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 ! -d 10.0.0.0/24 -j MASQUERAD
 sudo nmcli dev wifi hotspot ifname wlan1 ssid "$SSID" password "$PASS"
 sudo nmcli device modify wlan1 ipv4.method disabled
 sudo nmcli device modify wlan1 ipv6.method disabled
+sudo nmcli con modify Hotspot connection.autoconnect yes
 sudo systemctl start dhcpcd.service
 sudo systemctl start dnsmasq.service' | sudo tee -a /etc/startap.sh
 sudo sed -i 's^exit 0^sudo sh /etc/startap.sh \& \n\nexit 0^g' /etc/rc.local
