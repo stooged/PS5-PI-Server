@@ -84,7 +84,7 @@ sudo ./installbtt.sh
 
 if you setup a wifi connection to your home network use wlan0 because wlan1 will be used for the wifi access point.
 
-built for armbian 23.11 bookworm minimal, use this image.
+built for armbian 23.11 bookworm minimal, use this image.<br>
 <a href=https://redirect.armbian.com/bigtreetech-cb1/Bookworm_legacy_minimal>Armbian_23.11.1_Bigtreetech-cb1_bookworm_legacy_6.1.43_minimal.img.xz</a>
 
 <br><br>
