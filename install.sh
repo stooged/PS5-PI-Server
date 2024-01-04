@@ -1,6 +1,12 @@
 #!/bin/bash
 
-if [[ $(hostname) == "ps5" ]] ;then
+if [[ $(tr -d '\0' </proc/device-tree/model) == "BigTreeTech CB1" ]] ;then
+chmod 777 installbtt.sh
+sudo ./installbtt.sh
+exit;
+fi
+HSTN=$(hostname | cut -f1 -d' ')
+if [[ $HSTN == "ps5" ]] ;then
 echo "You have run this script already, you cannot run it again"
 exit;
 fi
@@ -41,7 +47,7 @@ sudo cp -r document /var/www/html/
 sudo touch /var/www/html/index.html
 echo "<html><meta HTTP-EQUIV='REFRESH' content='0; url=/document/index.html'></html>" | sudo tee -a /var/www/html/index.html
 sudo sed -i 's^"exit 0"^"exit"^g' /etc/rc.local
-sudo sed -i 's^exit 0^sudo bash ./etc/dstart.sh \& \n\nexit 0^g' /etc/rc.local
+sudo sed -i 's^exit 0^sudo sh /etc/dstart.sh \& \n\nexit 0^g' /etc/rc.local
 sudo rm /etc/dnsmasq.more.conf
 IP=$(hostname -I | cut -f1 -d' ')
 echo "address=/playstation.com/127.0.0.1
@@ -132,11 +138,10 @@ sudo iw dev wap0 del
 sudo iw dev wlan0 interface add wap0 type __ap
 sudo sysctl net.ipv4.ip_forward=1
 sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 ! -d 10.0.0.0/24 -j MASQUERADE
-sudo ifconfig wap0 up
 sudo systemctl start hostapd.service
 sudo systemctl start dhcpcd.service
 sudo systemctl start dnsmasq.service' | sudo tee -a /etc/startap.sh
-sudo sed -i 's^exit 0^sudo bash ./etc/startap.sh \& \n\nexit 0^g' /etc/rc.local
+sudo sed -i 's^exit 0^sudo sh /etc/startap.sh \& \n\nexit 0^g' /etc/rc.local
 sudo systemctl unmask hostapd
 sudo systemctl enable hostapd
 sudo update-rc.d hostapd disable
@@ -162,7 +167,7 @@ user_sub_token=$USER
 local_root=/var/www/html" | sudo tee -a /etc/vsftpd.conf
 sudo chmod 775 /var/www/html/
 sudo sed -i 's^exit 0^^g' /etc/rc.local
-USR=$(users | cut -f1 -d' ')
+USR=$(sudo groupmems -g users -l | cut -f1 -d' ')
 echo -e "sudo chown -R "$USR":"$USR" /var/www/html/\n\nexit 0" | sudo tee -a /etc/rc.local
 echo "FTP Installed"
 break;;
@@ -196,7 +201,6 @@ break;;
 * ) echo "Please answer Y or N";;
 esac
 done
-HSTN=$(hostname | cut -f1 -d' ')
 sudo sed -i "s^$HSTN^ps5^g" /etc/hosts
 sudo sed -i "s^$HSTN^ps5^g" /etc/hostname
 echo "Install complete, Rebooting"

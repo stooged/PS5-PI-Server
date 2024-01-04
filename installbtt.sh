@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [[ $(tr -d '\0' </proc/device-tree/model) != "BigTreeTech CB1" ]] ;then
+echo "This script is for the BTT PI only, you cannot run it on this board."
+exit;
+fi
 if [[ $(hostname) == "ps5" ]] ;then
 echo "You have run this script already, you cannot run it again"
 exit;
