@@ -140,6 +140,7 @@ sudo nmcli connection modify Hotspot wifi-sec.proto rsn
 sudo nmcli connection modify Hotspot wifi-sec.psk "$PASS"
 sudo nmcli connection modify Hotspot ipv4.addresses 10.0.0.1
 sudo nmcli connection modify Hotspot ipv6.method disabled
+sudo nmcli connection up Hotspot
 }
 if [ ! -e $nmcfile ] ;then
 makecon
@@ -156,7 +157,6 @@ sudo iptables -t nat -F
 sudo iptables -t mangle -F
 sudo iptables -F
 sudo iptables -X
-sudo nmcli connection up Hotspot
 sudo sysctl net.ipv4.ip_forward=1
 sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 ! -d 10.0.0.0/24 -j MASQUERADE' | sudo tee -a /etc/startap.sh
 sudo sed -i 's^exit 0^sudo bash ./etc/startap.sh \& \n\nexit 0^g' /etc/rc.local
