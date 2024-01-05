@@ -124,6 +124,28 @@ break;;
 esac
 done
 echo '#!/bin/bash
+sudo rm /etc/dnsmasq.more.conf
+while [ "$(hostname -I)" = "" ]; do
+  sleep 1
+done
+IP=$(hostname -I | cut -f1 -d" ")
+echo "address=/playstation.com/127.0.0.1
+address=/manuals.playstation.net/$IP
+address=/playstation.net/127.0.0.1
+address=/playstation.org/127.0.0.1
+address=/akadns.net/127.0.0.1
+address=/akamai.net/127.0.0.1
+address=/akamaiedge.net/127.0.0.1
+address=/edgekey.net/127.0.0.1
+address=/edgesuite.net/127.0.0.1
+address=/llnwd.net/127.0.0.1
+address=/scea.com/127.0.0.1
+address=/sonyentertainmentnetwork.com/127.0.0.1
+address=/ribob01.net/127.0.0.1
+address=/cddbp.net/127.0.0.1
+address=/nintendo.net/127.0.0.1
+address=/ea.com/127.0.0.1" | sudo tee -a /etc/dnsmasq.more.conf
+sudo service dnsmasq restart
 sleep 5
 . /etc/hostapd/hostapd.conf
 nmcfile="/etc/NetworkManager/system-connections/Hotspot.nmconnection"
@@ -159,6 +181,8 @@ sudo iptables -F
 sudo iptables -X
 sudo sysctl net.ipv4.ip_forward=1
 sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 ! -d 10.0.0.0/24 -j MASQUERADE' | sudo tee -a /etc/startap.sh
+sudo rm /etc/dstart.sh
+sudo sed -i 's^sudo bash ./etc/dstart.sh \&^^g' /etc/rc.local
 sudo sed -i 's^exit 0^sudo bash ./etc/startap.sh \& \n\nexit 0^g' /etc/rc.local
 echo "Wifi AP installed"
 break;;

@@ -131,6 +131,27 @@ wpa_pairwise=TKIP CCMP
 rsn_pairwise=CCMP" | sudo tee -a /etc/hostapd/hostapd.conf
 echo "DAEMON_CONF=\"/etc/hostapd/hostapd.conf\"" | sudo tee -a /etc/default/hostapd
 echo '#!/bin/bash
+sudo rm /etc/dnsmasq.more.conf
+while [ "$(hostname -I)" = "" ]; do
+  sleep 1
+done
+IP=$(hostname -I | cut -f1 -d" ")
+echo "address=/playstation.com/127.0.0.1
+address=/manuals.playstation.net/$IP
+address=/playstation.net/127.0.0.1
+address=/playstation.org/127.0.0.1
+address=/akadns.net/127.0.0.1
+address=/akamai.net/127.0.0.1
+address=/akamaiedge.net/127.0.0.1
+address=/edgekey.net/127.0.0.1
+address=/edgesuite.net/127.0.0.1
+address=/llnwd.net/127.0.0.1
+address=/scea.com/127.0.0.1
+address=/sonyentertainmentnetwork.com/127.0.0.1
+address=/ribob01.net/127.0.0.1
+address=/cddbp.net/127.0.0.1
+address=/nintendo.net/127.0.0.1
+address=/ea.com/127.0.0.1" | sudo tee -a /etc/dnsmasq.more.conf
 sudo systemctl stop hostapd.service
 sudo systemctl stop dnsmasq.service
 sudo systemctl stop dhcpcd.service
@@ -148,7 +169,9 @@ sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 ! -d 10.0.0.0/24 -j MASQUERAD
 sudo systemctl start hostapd.service
 sudo systemctl start dhcpcd.service
 sudo systemctl start dnsmasq.service' | sudo tee -a /etc/startap.sh
-sudo sed -i 's^exit 0^sudo sh /etc/startap.sh \& \n\nexit 0^g' /etc/rc.local
+sudo rm /etc/dstart.sh
+sudo sed -i 's^sudo bash ./etc/dstart.sh \&^^g' /etc/rc.local
+sudo sed -i 's^exit 0^sudo bash ./etc/startap.sh \& \n\nexit 0^g' /etc/rc.local
 sudo systemctl unmask hostapd
 sudo systemctl enable hostapd
 sudo update-rc.d hostapd disable
