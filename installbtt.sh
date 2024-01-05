@@ -124,12 +124,31 @@ break;;
 esac
 done
 echo '#!/bin/bash
-sleep 10
+sleep 5
 . /etc/hostapd/hostapd.conf
+nmcfile="/etc/NetworkManager/system-connections/Hotspot.nmconnection"
+makecon(){
 sudo nmcli connection delete Hotspot
 sudo rm /etc/NetworkManager/system-connections/*Hotspot*
-sudo systemctl stop dnsmasq.service
-sudo systemctl stop dhcpcd.service
+sudo nmcli connection add type wifi ifname wlan1 con-name Hotspot ssid "$SSID"
+sudo nmcli connection modify Hotspot wifi.channel 1 802-11-wireless.band bg ipv4.method shared
+sudo nmcli connection modify Hotspot 802-11-wireless.mode ap
+sudo nmcli connection modify Hotspot wifi-sec.key-mgmt wpa-psk
+sudo nmcli connection modify Hotspot wifi-sec.group ccmp
+sudo nmcli connection modify Hotspot wifi-sec.pairwise ccmp
+sudo nmcli connection modify Hotspot wifi-sec.proto rsn
+sudo nmcli connection modify Hotspot wifi-sec.psk "$PASS"
+sudo nmcli connection modify Hotspot ipv4.addresses 10.0.0.1
+sudo nmcli connection modify Hotspot ipv6.method disabled
+}
+if [ ! -e $nmcfile ] ;then
+makecon
+fi
+NSSID=$(sed -nr "/^\[wifi\]/ { :l /^ssid[ ]*=/ { s/[^=]*=[ ]*//; p; q;}; n; b l;}" $nmcfile)
+NPSK=$(sed -nr "/^\[wifi-security\]/ { :l /^psk[ ]*=/ { s/[^=]*=[ ]*//; p; q;}; n; b l;}" $nmcfile)
+if [[ $PASS != $NPSK  ||  $SSID != $NSSID ]] ;then
+makecon
+fi
 sudo iptables -P INPUT ACCEPT
 sudo iptables -P FORWARD ACCEPT
 sudo iptables -P OUTPUT ACCEPT
@@ -137,15 +156,10 @@ sudo iptables -t nat -F
 sudo iptables -t mangle -F
 sudo iptables -F
 sudo iptables -X
+sudo nmcli connection up Hotspot
 sudo sysctl net.ipv4.ip_forward=1
-sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 ! -d 10.0.0.0/24 -j MASQUERADE
-sudo nmcli dev wifi hotspot ifname wlan1 ssid "$SSID" password "$PASS"
-sudo nmcli device modify wlan1 ipv4.method disabled
-sudo nmcli device modify wlan1 ipv6.method disabled
-sudo nmcli con modify Hotspot connection.autoconnect yes
-sudo systemctl start dhcpcd.service
-sudo systemctl start dnsmasq.service' | sudo tee -a /etc/startap.sh
-sudo sed -i 's^exit 0^sudo sh /etc/startap.sh \& \n\nexit 0^g' /etc/rc.local
+sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 ! -d 10.0.0.0/24 -j MASQUERADE' | sudo tee -a /etc/startap.sh
+sudo sed -i 's^exit 0^sudo bash ./etc/startap.sh \& \n\nexit 0^g' /etc/rc.local
 echo "Wifi AP installed"
 break;;
 [Nn]* ) echo "Skipping Wifi AP install"
