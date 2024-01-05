@@ -134,6 +134,13 @@ echo '#!/bin/bash
 sudo systemctl stop hostapd.service
 sudo systemctl stop dnsmasq.service
 sudo systemctl stop dhcpcd.service
+sudo iptables -P INPUT ACCEPT
+sudo iptables -P FORWARD ACCEPT
+sudo iptables -P OUTPUT ACCEPT
+sudo iptables -t nat -F
+sudo iptables -t mangle -F
+sudo iptables -F
+sudo iptables -X
 sudo iw dev wap0 del
 sudo iw dev wlan0 interface add wap0 type __ap
 sudo sysctl net.ipv4.ip_forward=1
