@@ -21,6 +21,7 @@ sudo sed -i 's/# listen \[::\]:443 ssl/ listen \[::\]:443 ssl/g' /etc/nginx/site
 sudo sed -i 's/server_name _/server_name ps5.local/g' /etc/nginx/sites-available/default
 sudo sed -i 's^# SSL configuration^# SSL configuration\r\n	 ssl_certificate /etc/nginx/sites-available/cert.crt;\r\n	 ssl_certificate_key /etc/nginx/sites-available/cert.key;^g' /etc/nginx/sites-available/default
 echo '#!/bin/bash
+coproc read -t 20 && wait "$!" || true
 sudo rm /etc/dnsmasq.more.conf
 while [ "$(hostname -I)" = "" ]; do
   sleep 1
@@ -126,6 +127,7 @@ break;;
 esac
 done
 echo '#!/bin/bash
+coproc read -t 20 && wait "$!" || true
 sudo rm /etc/dnsmasq.more.conf
 while [ "$(hostname -I)" = "" ]; do
   sleep 1
