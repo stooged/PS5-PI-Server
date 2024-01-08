@@ -75,7 +75,7 @@ sudo apt install dhcpcd5 iptables net-tools -y
 echo -e "\r\ninterface wlan1
     static ip_address=10.0.0.1/24
     nohook wpa_supplicant" | sudo tee -a /etc/dhcpcd.conf
-echo -e "\r\ninterface=wlan1\r\ndhcp-range=10.0.0.2,10.0.0.20,255.255.255.0,24h" | sudo tee -a /etc/dnsmasq.conf
+echo -e "\r\ninterface=wlan1\r\ndhcp-range=10.0.0.2,10.0.0.20,255.255.255.0,24h\r\ninterface=wlan0\r\ninterface=end0" | sudo tee -a /etc/dnsmasq.conf
 while true; do
 read -p "$(printf '\r\n\r\n\033[36mDo you want to set a SSID and password for the wifi access point?\r\nif you select no then these defaults will be used\r\n\r\nSSID=\033[33mPS5_WEB_AP\r\n\033[36mPASS=\033[33mpassword\r\n\r\n\033[36m(Y|N)?: \033[0m')" wapset
 case $wapset in
