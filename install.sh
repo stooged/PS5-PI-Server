@@ -49,7 +49,7 @@ sudo cp -r document /var/www/html/
 sudo touch /var/www/html/index.html
 echo "<html><meta HTTP-EQUIV='REFRESH' content='0; url=/document/index.html'></html>" | sudo tee -a /var/www/html/index.html
 sudo sed -i 's^"exit 0"^"exit"^g' /etc/rc.local
-sudo sed -i 's^exit 0^sudo sh /etc/dstart.sh \& \n\nexit 0^g' /etc/rc.local
+sudo sed -i 's^exit 0^sudo bash ./etc/dstart.sh \& \n\nexit 0^g' /etc/rc.local
 sudo rm /etc/dnsmasq.more.conf
 IP=$(hostname -I | cut -f1 -d' ')
 echo "address=/playstation.com/127.0.0.1
