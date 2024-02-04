@@ -2,27 +2,27 @@ const payload_map =
     [
         {
             displayTitle: 'etaHEN',
-            description: 'Runs With 3.xx and 4.xx. FPKG enabler For FW 3.xx / 4.xx Only.',
-            fileName: 'etaHEN-1.31B.bin',
+            description: 'All-in-one HEN',
+            fileName: 'etaHEN-1.5B.bin',
             author: 'LightningMods_, sleirsgoevy, ChendoChap, astrelsky, illusion',
             source: 'https://github.com/LightningMods/etaHEN',
-            version: '1.31 beta'
+            version: '1.5 beta'
         },
         {
             displayTitle: 'K-Stuff',
-            description: 'FW 3.00, 3.20, 3.21 & 4.03-4.51 Only (Browser crashes on 3.xx). FPKG enabler',
-            fileName: 'ps5-kstuff-v1.2.bin',
+            description: 'FPKG enabler',
+            fileName: 'ps5-kstuff-v1.4.bin',
             author: 'sleirsgoevy',
-            source: 'https://github.com/sleirsgoevy/ps4jb2/blob/ps5-403/ps5-kstuff.bin',
-            version: '1.2'
+            source: 'https://github.com/idlesauce/ps5-kstuff-builds/releases',
+            version: '1.4'
         },
         {
             displayTitle: 'libhijacker game-patch',
             description: 'Patches supported games to run at higher framerates, and adds debug menus to certain titles.',
-            fileName: 'libhijacker-1.138.elf',
+            fileName: 'libhijacker-1.142.elf',
             author: 'illusion0001, astrelsky',
             source: 'https://github.com/illusion0001/libhijacker/releases',
-            version: '1.138'
+            version: '1.142'
         },
         {
             displayTitle: 'ps5debug',
@@ -31,6 +31,14 @@ const payload_map =
             author: 'SiSTR0, ctn123',
             source: 'https://github.com/GoldHEN/ps5debug',
             version: '1.0b1'
+        },
+        {
+            displayTitle: 'HEN-V',
+            description: 'PS5 Homebrew Enabler, FTP, klog',
+            fileName: 'henv.elf',
+            author: 'astrelsky',
+            source:'https://github.com/astrelsky/HEN-V/releases',
+            version: '0.0.1-alpha'
         },
         {
             displayTitle: 'PS5 Payload ELF Loader',
@@ -61,7 +69,7 @@ const payload_map =
             description: 'Shows kernel build, os and sdk versions',
             fileName: 'versions.elf',
             author: 'SiSTRo',
-            source:'https://mega.nz/folder/4xA2ATTI#6lHvye1JUfhxRGvqOva8fw/folder/gwhWmRrB',
+            source:'https://github.com/SiSTR0/ps5-versions/releases/download/v1.0/ps5-versions.elf',
             version: '1.0'
         },
         {

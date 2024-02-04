@@ -1,7 +1,7 @@
 # PS5 PI Server
 
 
-this is an install script to setup a dns server(blocker), web server, wifi access point and a exploit host on a <a href=https://www.raspberrypi.com/products/>Raspberry PI 3/4/400</a>, <a href=https://wiki.radxa.com/Rock4/4cplus>ROCK 4C Plus</a> or <a href=https://biqu.equipment/en-au/products/bigtreetech-btt-pi-v1-2>BTT Pi</a>.<br>
+this is an install script to setup a dns server(blocker), web server, wifi access point and a exploit host on a <a href=https://www.raspberrypi.com/products/>Raspberry PI 3/4/400 5</a>, <a href=https://wiki.radxa.com/Rock4/4cplus>ROCK 4C Plus</a> or <a href=https://biqu.equipment/en-au/products/bigtreetech-btt-pi-v1-2>BTT Pi</a>.<br>
 
 the script will prompt you to install a ftp server and setup a samba share to access the exploit/payload files.<br>
 you can setup either one or both or none at all.<br>
@@ -16,6 +16,7 @@ install the <a href="https://www.armbian.com/download/?device_support=Standard%2
 
 i have tested the following images:<br>
 <a href=https://redirect.armbian.com/region/NA/rpi4b/Bookworm_current>Raspberry PI 3/4/400 image</a><br>
+<a href=https://redirect.armbian.com/region/NA/rpi5b/Bookworm_current>Raspberry PI 5 image</a><br>
 <a href=https://au.sbcmirror.org/armbian/dl/rockpi-4cplus/archive/Armbian_23.11.1_Rockpi-4cplus_bookworm_current_6.1.63.img.xz>Rock PI 4C+ image</a><br>
 <a href=https://redirect.armbian.com/bigtreetech-cb1/Bookworm_legacy_minimal>BTT PI v1.2 image</a><br>
 
