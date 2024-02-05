@@ -30,7 +30,7 @@ i have tested the following images:<br>
 <a href=https://downloads.raspberrypi.com/raspios_lite_armhf/images/raspios_lite_armhf-2023-12-11/2023-12-11-raspios-bookworm-armhf-lite.img.xz>Raspberry PI Zero W image</a><br>
 <a href=https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2023-12-11/2023-12-11-raspios-bookworm-arm64-lite.img.xz>Raspberry PI Zero 2 W image</a><br>
 
-
+<br>
 <br>
 
 during the first run of armbian if you are asked to "choose the default system command shell" make sure you select <b>bash</b> which is normally option 1
