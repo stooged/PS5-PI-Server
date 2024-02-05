@@ -1,7 +1,7 @@
 # PS5 PI Server
 
 
-this is an install script to setup a dns server(blocker), web server, wifi access point and a exploit host on a <a href=https://www.raspberrypi.com/products/>Raspberry PI 3/4/400 5</a>, <a href=https://www.raspberrypi.com/products/raspberry-pi-zero-w/>Raspberry PI Zero W</a> or a <a href=https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>Raspberry PI Zero 2 W</a>, <a href=https://wiki.radxa.com/Rock4/4cplus>ROCK 4C Plus</a> or <a href=https://biqu.equipment/en-au/products/bigtreetech-btt-pi-v1-2>BTT Pi</a>.<br>
+this is an install script to setup a dns server(blocker), web server, wifi access point and a exploit host on a <a href=https://www.raspberrypi.com/products/>Raspberry PI 3/4/400 5</a>, <a href=https://www.raspberrypi.com/products/raspberry-pi-zero-w/>Raspberry PI Zero W</a>, <a href=https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>Raspberry PI Zero 2 W</a>, <a href=https://wiki.radxa.com/Rock4/4cplus>ROCK 4C Plus</a> or <a href=https://biqu.equipment/en-au/products/bigtreetech-btt-pi-v1-2>BTT Pi</a>.<br>
 
 the script will prompt you to install a ftp server and setup a samba share to access the exploit/payload files.<br>
 you can setup either one or both or none at all.<br>
