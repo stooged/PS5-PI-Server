@@ -1,6 +1,11 @@
 #!/bin/bash
 
 PITYP=$(tr -d '\0' </proc/device-tree/model) 
+if [[ $PITYP == "BigTreeTech CB1" ]] ;then
+WLN="wlan1"
+else
+WLN="wlan0"
+fi
 echo -e '\033[32mInstalling PS5 PI Server on\033[33m '$PITYP'\033[0m'
 sudo apt install dnsmasq nginx -y
 echo 'bogus-priv
@@ -62,7 +67,7 @@ slaac private
 interface wap0
     static ip_address=10.0.0.1/24
     nohook wpa_supplicant" | sudo tee /etc/dhcpcd.conf	
-echo -e "\r\ninterface=wap0\r\ndhcp-range=10.0.0.2,10.0.0.2,255.255.255.0,24h\r\ninterface=wlan0\r\ninterface=end0\r\ninterface=eth0" | sudo tee -a /etc/dnsmasq.conf
+echo -e "\r\ninterface=wap0\r\ndhcp-range=10.0.0.2,10.0.0.2,255.255.255.0,24h\r\ninterface="$WLN"\r\ninterface=end0\r\ninterface=eth0" | sudo tee -a /etc/dnsmasq.conf
 while true; do
 read -p "$(printf '\r\n\r\n\033[36mDo you want to set a SSID and password for the wifi access point?\r\nif you select no then these defaults will be used\r\n\r\nSSID=\033[33mPS5_WEB_AP\r\n\033[36mPASS=\033[33mpassword\r\n\r\n\033[36m(Y|N)?: \033[0m')" wapset
 case $wapset in
@@ -130,7 +135,7 @@ sudo iptables -t mangle -F
 sudo iptables -F
 sudo iptables -X
 sudo iw dev wap0 del
-sudo iw dev wlan0 interface add wap0 type __ap
+sudo iw dev '$WLN' interface add wap0 type __ap
 sudo sysctl net.ipv4.ip_forward=1
 sudo sysctl net.ipv4.conf.all.route_localnet=1
 sudo iptables -t nat -I PREROUTING -p tcp --dport 1024:10000 -j DNAT --to 10.0.0.2:1024-10000
