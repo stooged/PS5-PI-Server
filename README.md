@@ -31,8 +31,6 @@ it may work on other variants of pi type hardware if you can find the armbian im
 
 during the first run of armbian if you are asked to "choose the default system command shell" make sure you select <b>bash</b> which is normally option 1
 
-if you are using the <a href=https://biqu.equipment/en-au/products/bigtreetech-btt-pi-v1-2>BTT Pi</a> and you setup a wifi connection to your home network use wlan0 because wlan1 will be used for the wifi access point.
-
 <br><br>
 
 boot up the pi and set your credentials then login using a keyboard/screen on the pi or use <a href=http://putty.org>putty</a> or something similar to access ssh remotely.
