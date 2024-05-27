@@ -19,7 +19,6 @@ it is using <a href=https://github.com/idlesauce/PS5-Exploit-Host>PS5-Exploit-Ho
 <a href=https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/>Raspberry Pi 3B+</a><br>
 <a href=https://www.raspberrypi.com/products/raspberry-pi-2-model-b/>Raspberry Pi 2 Model B</a><br>
 <a href=https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>Raspberry Pi Zero 2 W</a><br>
-<a href=https://www.raspberrypi.com/products/raspberry-pi-zero-w/>Raspberry Pi Zero W</a><br>
 <a href=https://wiki.radxa.com/Rock4/4cplus>ROCK PI 4C Plus</a> with armbian <a href=https://imola.armbian.com/archive/rockpi-4cplus/archive/Armbian_23.11.1_Rockpi-4cplus_bookworm_current_6.1.63.img.xz>Image</a><br>
 <a href=https://biqu.equipment/products/bigtreetech-btt-pi-v1-2>BIGTREETECH BTT Pi V1.2</a> with armbian <a href=https://www.armbian.com/bigtreetech-cb1/>minimal</a><br>
 
@@ -51,7 +50,7 @@ sudo apt install git -y
 sudo git clone https://github.com/stooged/PS5-PI-Server
 cd PS5-PI-Server
 sudo chmod 777 install.sh
-sudo ./install.sh
+sudo bash install.sh
 
 ```
 
