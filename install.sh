@@ -273,7 +273,6 @@ break;;
 * ) echo -e '\033[31mPlease answer Y or N\033[0m';;
 esac
 done
-sudo rm -f /usr/lib/systemd/system/network-online.target
 HSTN=$(hostname | cut -f1 -d' ')
 if [[ ! $HSTN == "ps5" ]] ;then
 sudo sed -i "s^$HSTN^ps5^g" /etc/hosts
