@@ -1,11 +1,6 @@
 #!/bin/bash
 
 PITYP=$(tr -d '\0' </proc/device-tree/model) 
-if [[ $PITYP == "BigTreeTech CB1" ]] ;then
-WLN="wlan1"
-else
-WLN="wlan0"
-fi
 echo -e '\033[32mInstalling PS5 PI Server on\033[33m '$PITYP'\033[0m'
 sudo apt install dnsmasq nginx -y
 echo 'bogus-priv
