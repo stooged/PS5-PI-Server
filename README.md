@@ -1,7 +1,7 @@
 # PS5 PI Server
 
 
-this is an install script to setup a dns server(blocker), web server, wifi access point and a exploit host on a <a href=https://www.raspberrypi.com/products/>Raspberry PI 3/4/400 5</a>, <a href=https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>Raspberry PI Zero 2 W</a>, <a href=https://wiki.radxa.com/Rock4/4cplus>ROCK 4C Plus</a> or <a href=https://biqu.equipment/en-au/products/bigtreetech-btt-pi-v1-2>BTT Pi</a>.<br>
+this is an install script to setup a dns server(blocker), web server, wifi access point and a exploit host on a raspberry pi.<br>
 
 the script will prompt you to install a ftp server and setup a samba share to access the exploit/payload files.<br>
 you can setup either one or both or none at all.<br>
@@ -10,26 +10,26 @@ you can setup either one or both or none at all.<br>
 it is using <a href=https://github.com/idlesauce/PS5-Exploit-Host>PS5-Exploit-Host</a> by idlesauce.
 
 
+
+## Tested PI Models
+
+<a href=https://www.raspberrypi.com/products/raspberry-pi-5/>Raspberry Pi 5</a><br>
+<a href=https://www.raspberrypi.com/products/raspberry-pi-4-model-b/>Raspberry Pi 4 Model B</a><br>
+<a href=https://www.raspberrypi.com/products/raspberry-pi-400/>Raspberry Pi 400</a><br>
+<a href=https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/>Raspberry Pi 3B+</a><br>
+<a href=https://www.raspberrypi.com/products/raspberry-pi-2-model-b/>Raspberry Pi 2 Model B</a><br>
+<a href=https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>Raspberry Pi Zero 2 W</a><br>
+<a href=https://www.raspberrypi.com/products/raspberry-pi-zero-w/>Raspberry Pi Zero W</a><br>
+<a href=https://wiki.radxa.com/Rock4/4cplus>ROCK PI 4C Plus</a> with armbian <a href=https://imola.armbian.com/archive/rockpi-4cplus/archive/Armbian_23.11.1_Rockpi-4cplus_bookworm_current_6.1.63.img.xz>Image</a><br>
+<a href=https://biqu.equipment/products/bigtreetech-btt-pi-v1-2>BIGTREETECH BTT Pi V1.2</a> with armbian <a href=https://www.armbian.com/bigtreetech-cb1/>minimal</a><br>
+
 ## Install
 
-install the <a href="https://www.armbian.com/download/?device_support=Standard%20support">Armbian</a> os onto your pi
+You need to install <a href=https://www.raspberrypi.com/software/operating-systems/>Raspberry Pi OS Lite</a> or <a href="https://www.armbian.com/">Armbian Cli / Minimal</a> onto a sd card.<br>
 
-i have tested the following images:<br>
-<a href=https://redirect.armbian.com/region/NA/rpi4b/Bookworm_current>Raspberry PI 3/4/400 image</a><br>
-<a href=https://redirect.armbian.com/region/NA/rpi5b/Bookworm_current>Raspberry PI 5 image</a><br>
-<a href=https://au.sbcmirror.org/armbian/dl/rockpi-4cplus/archive/Armbian_23.11.1_Rockpi-4cplus_bookworm_current_6.1.63.img.xz>Rock PI 4C+ image</a><br>
-<a href=https://redirect.armbian.com/bigtreetech-cb1/Bookworm_legacy_minimal>BTT PI v1.2 image</a><br>
 
-it may work on other variants of raspberry pi hardware if you can find the armbian image to suit that board.
+it may work on other variants of pi type hardware if you can find the armbian image to suit that board.
 
-<br>
-
-if you have a <a href=https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>Raspberry PI Zero 2 W</a> you can use <a href=https://www.raspberrypi.com/software/operating-systems/>Raspberry Pi OS Lite</a>
-
-i have tested the following images:<br>
-<a href=https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2023-12-11/2023-12-11-raspios-bookworm-arm64-lite.img.xz>Raspberry PI Zero 2 W image</a><br>
-
-<br>
 <br>
 
 during the first run of armbian if you are asked to "choose the default system command shell" make sure you select <b>bash</b> which is normally option 1
@@ -46,23 +46,11 @@ once you have done that just run the following commands:
 
 install git
 
-```
+```sh
 sudo apt update
 sudo apt install git -y
-```
-
-
-clone this repo and enter the cloned directory
-
-```
 sudo git clone https://github.com/stooged/PS5-PI-Server
 cd PS5-PI-Server
-```
-
-
-run the install script
-
-```
 sudo chmod 777 install.sh
 sudo ./install.sh
 
@@ -72,8 +60,18 @@ sudo ./install.sh
 <br><br>
 
 
+## Console FTP / Elfload / PKG Install
 
-### FTP
+you can access the ftp, klog, Elfload, Pkg install servers on the console<br>
+Your pi must be connected to your home network via wifi or a second ethernet connection<br>
+To connect to the servers from your pc just connect to the raspberry pi ip on your network and all requests will be forwarded to the console<br>
+
+For ftp make sure you set the transfer mode on your ftp client software to `Active` not passive.<br>
+
+<br><br>
+
+
+### PI FTP
 <hr>
 
 if you install FTP to access the www folder for the exploit files/payloads you can use your pi login user/pass to access the server.<br>
@@ -81,7 +79,7 @@ if you install FTP to access the www folder for the exploit files/payloads you c
 <br><br>
 
 
-### Samba
+### PI Samba
 <hr>
 
 if you setup samba to access the www folder for the exploit files/payloads you can access the drive on \\\ps5.local\www or smb:\\\ps5.local\www<br>
