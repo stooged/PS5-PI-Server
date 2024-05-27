@@ -44,7 +44,6 @@ boot up the pi and set your credentials then login using a keyboard/screen on th
 once you have done that just run the following commands:
 <br>
 
-install git
 
 ```sh
 sudo apt update
